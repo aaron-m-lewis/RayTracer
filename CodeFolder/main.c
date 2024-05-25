@@ -11,23 +11,27 @@ int usage(int status) {
     exit(status);
 }
 
-bool sphere_intersection(ray r1, vec3 origin, double radius) {
+double sphere_intersection(ray r1, vec3 origin, double radius) {
 
     vec3 p_to_c = vec3_sub(origin, r1.origin);
-    double a = vec3_dot(r1.direction, r1.direction);
-    double b = vec3_dot(vec3_mult_scalar(r1.direction, -2.0), p_to_c);
-    double c = vec3_dot(p_to_c, p_to_c) - (radius * radius);
-    double descriminant = b * b - 4 * a * c;
-    return (descriminant >= 0);
+    double a = vec3_length_squared(r1.direction);
+    double h = vec3_dot(r1.direction, p_to_c);
+    double c = vec3_length_squared(p_to_c) - (radius * radius);
+    double discriminant = h * h - a * c;
+
+    if (discriminant < 0) return -1.0;
+    else return (h - sqrt(discriminant)) / a;
 }
 
 vec3 ray_color(ray r1) {
 
     // insert function for calculating pixel color based on ray direction
     vec3 sphere_loc = {0.0, 0.0, -1.0};
-    if (sphere_intersection(r1, sphere_loc, 0.5)) {
-        vec3 color = {0.0, 0.0, 1.0};
-        return color;
+    double time = sphere_intersection(r1, sphere_loc, 0.5);
+    if (time > 0.0) {
+        vec3 normal = vec3_unit_vec(vec3_sub(ray_position(r1, time), sphere_loc));
+        vec3 offset = {1.0, 1.0, 1.0};
+        return vec3_mult_scalar(vec3_add(normal, offset), 0.5);
     }
 
     vec3 direction_unit_vec = vec3_unit_vec(r1.direction);

@@ -61,8 +61,12 @@ vec3 vec3_cross(vec3 v1, vec3 v2) {
     return resultant;
 }
 
+double vec3_length_squared(vec3 v1) {
+    return pow(v1.x, 2) + pow(v1.y, 2) + pow(v1.z, 2);
+}
+
 double vec3_length(vec3 v1) {
-    return sqrt(pow(v1.x, 2) + pow(v1.y, 2) + pow(v1.z, 2));
+    return sqrt(vec3_length_squared(v1));
 }
 
 vec3 vec3_unit_vec(vec3 v1) {
