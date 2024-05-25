@@ -51,7 +51,7 @@ vec3 vec3_div(vec3 v1, double num) {
 }
 
 double vec3_dot(vec3 v1, vec3 v2) {
-    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
 }
 
 vec3 vec3_cross(vec3 v1, vec3 v2) {
