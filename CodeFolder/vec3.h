@@ -1,3 +1,5 @@
+#ifndef VEC3_H
+#define VEC3_H
 
 #include <math.h>
 
@@ -88,3 +90,5 @@ void write_pixel_colors(FILE *destination, vec3 v1) {
 
     fprintf(destination, "%d %d %d\t", red_int, green_int, blue_int);
 }
+
+#endif
