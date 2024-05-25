@@ -11,7 +11,13 @@ int usage(int status) {
 
 vec3 ray_color(ray r1) {
     // insert function for calculating pixel color based on ray direction
-    vec3 color = {0.0, 0.0, 0.0};
+    vec3 direction_unit_vec = vec3_unit_vec(r1.direction);
+    double a = (direction_unit_vec.y + 1.0) * 0.5;
+    vec3 white_color = {1.0, 1.0, 1.0};
+    vec3 green_color = {0.5, 1.0, 0.5};
+    vec3 color = vec3_add(vec3_mult_scalar(white_color, 1.0 - a), vec3_mult_scalar(green_color, a));
+
+    //vec3 color = {0.0, 0.0, 0.0};
     return color;
 }
 
