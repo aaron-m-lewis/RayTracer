@@ -11,6 +11,8 @@ int usage(int status) {
     exit(status);
 }
 
+
+//function determines at which time the ray intersects the surface of the sphere
 double sphere_intersection(ray r1, vec3 origin, double radius) {
 
     vec3 p_to_c = vec3_sub(origin, r1.origin);
@@ -23,9 +25,9 @@ double sphere_intersection(ray r1, vec3 origin, double radius) {
     else return (h - sqrt(discriminant)) / a;
 }
 
+//determines what color the pixel the ray passes through in the viewport should be
 vec3 ray_color(ray r1) {
 
-    // insert function for calculating pixel color based on ray direction
     vec3 sphere_loc = {0.0, 0.0, -1.0};
     double time = sphere_intersection(r1, sphere_loc, 0.5);
     if (time > 0.0) {
